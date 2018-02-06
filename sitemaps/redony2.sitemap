@@ -124,7 +124,7 @@ Frame label="Automatizálás" {
 
 
 	Frame label="Lámpák" icon="firstfloor" {
-   		Switch item=Kapcsolo1	label="Földgömb Dolgozó"
+   		Switch item=Kapcsolo1 icon="light"	label="Földgömb Dolgozó"
    		
    		//Switch item=MiLight_Box	label="MiLight_Box"
    		//Slider item=MiLight_Box	label="MiLight_Box"
@@ -141,21 +141,26 @@ Frame label="Automatizálás" {
 		//Text item=Par_bent3
 		//Text item=Mozg_bent3
 		//Text item=Feny_bent3
-		Text item=Hom_bent1
-		Text item=Par_bent1
-		Text item=Mozg_bent1
-		Text item=Hom_bent2
-		Text item=Par_bent2
-		Text item=Weather_Temperature
-		Text item=Weather_Temperature_Tomorrow_max
-		Text item=Weather_Temperature_Tomorrow_min
-		//Text item=Weather_Clouds
-		//Text item=Weather_Clouds_Tomorrow
-		Text item=Weather_Precip_Probability
-		Text item=Weather_Precip_Probability_Tomorrow
-		Text item=Weather_Condition
-		Text item=Weather_Condition_Tomorrow
-		
+		Text label="Fent" icon="firstfloor" {
+			Text item=Hom_bent1
+			Text item=Par_bent1
+			Text item=Mozg_bent1
+		}
+		Text label="Lent" icon="groundfloor" {
+			Text item=Hom_bent2
+			Text item=Par_bent2
+		}
+		Text label="Idojaras" icon="climate" {
+			Text item=Weather_Temperature
+			Text item=Weather_Temperature_Tomorrow_max
+			Text item=Weather_Temperature_Tomorrow_min
+			//Text item=Weather_Clouds
+			//Text item=Weather_Clouds_Tomorrow
+			Text item=Weather_Precip_Probability
+			Text item=Weather_Precip_Probability_Tomorrow
+			Text item=Weather_Condition
+			Text item=Weather_Condition_Tomorrow
+		}
 	}
 
 
