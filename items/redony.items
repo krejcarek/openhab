@@ -1,0 +1,97 @@
+Group gRedony "gMinden Redony" <rollershutter>
+Group gRedonyFsz "gRedonyok Foldszint" <rollershutter> 
+Group gRedonyEm "gRedonyok Emelet" <rollershutter> 
+Group gRedonyEsteLe "gRedonyok Este Le" <rollershutter> 
+Group gRedonyEsteReszbenLe "gRedonyok Este Reszben Le" <rollershutter> 
+Group gRedonyHaloszobak "gRedonyok Haloszobak" <rollershutter> 
+Group gRedonyTeszt "gRedonyok Teszt" <rollershutter>
+Group gRedonyNappali "gRedonyok Nappali" <rollershutter>
+
+
+Rollershutter Redony "Minden Redony" <rollershutter>
+Rollershutter RedonyFsz "Redonyok Foldszint" <rollershutter> 
+Rollershutter RedonyEm "Redonyok Emelet" <rollershutter> 
+Rollershutter RedonyEsteLe "Redonyok Este Le" <rollershutter> 
+Rollershutter RedonyEsteReszbenLe "Redonyok Este Reszben Le" <rollershutter> 
+Rollershutter RedonyHaloszobak "Redonyok Haloszobak" <rollershutter> 
+Rollershutter RedonyTeszt "Redonyok Teszt" <rollershutter>
+
+Rollershutter	redony_EM_HAL	"em Halo"					<rollershutter> (gRedonyTeszt, gRedonyHaloszobak, gRedonyEsteReszbenLe, gRedonyEm, gRedony) {channel="mysensors:cover:gateway:Cover_51_0:cover"}
+Rollershutter	redony_EM_GAR	"em Gardrob"				<rollershutter>	(gRedonyTeszt, gRedonyEsteLe, gRedonyEm, gRedony) {channel="mysensors:cover:gateway:Cover_51_1:cover"}
+Rollershutter   redony_EM_FIU	"em Fiuszoba"   			<rollershutter> (gRedonyHaloszobak,gRedonyEsteLe, gRedonyEm, gRedony) {channel="mysensors:cover:gateway:Cover_53_4:cover"}
+Rollershutter   redony_EM_LANY	"em Lanyszoba"  			<rollershutter> (gRedonyHaloszobak, gRedonyEsteLe, gRedonyEm, gRedony) {channel="mysensors:cover:gateway:Cover_53_3:cover"}
+
+Rollershutter   redony_FSZ_VEN	"fsz Vendeg"				<rollershutter> (gRedonyEsteLe, gRedonyFsz, gRedony) {channel="mysensors:cover:gateway:Cover_51_2:cover"}
+Rollershutter   redony_FSZ_DOL	"fsz Dolgozo"				<rollershutter> (gRedonyEsteReszbenLe, gRedonyFsz, gRedony) {channel="mysensors:cover:gateway:Cover_51_3:cover"}
+Rollershutter   redony_FSZ_NOLD	"fsz Nappali oldalsó"		<rollershutter> (gRedonyEsteLe, gRedonyFsz, gRedonyNappali, gRedony) {channel="mysensors:cover:gateway:Cover_52_0:cover"}
+Rollershutter   redony_FSZ_NKF	"fsz Nappali kis-fix"       <rollershutter> (gRedonyEsteLe, gRedonyFsz, gRedonyNappali, gRedony) {channel="mysensors:cover:gateway:Cover_52_3:cover"}
+Rollershutter   redony_FSZ_NTF	"fsz Nappali toló-fix"		<rollershutter> (gRedonyEsteLe, gRedonyFsz, gRedonyNappali, gRedony) {channel="mysensors:cover:gateway:Cover_53_0:cover"}
+Rollershutter   redony_FSZ_NTNY	"fsz Nappali toló-nyitható"	<rollershutter> (gRedonyEsteLe, gRedonyFsz, gRedonyNappali, gRedony) {channel="mysensors:cover:gateway:Cover_53_1:cover"}
+Rollershutter   redony_FSZ_NKET	"fsz Nappali kétszárnyú"	<rollershutter> (gRedonyEsteLe, gRedonyFsz, gRedonyNappali, gRedony) {channel="mysensors:cover:gateway:Cover_53_2:cover"}
+Rollershutter   redony_FSZ_KNYH	"fsz Konyha"				<rollershutter> (gRedonyEsteLe, gRedonyFsz, gRedony) {channel="mysensors:cover:gateway:Cover_52_1:cover"}
+Rollershutter   redony_FSZ_FRD	"fsz Fürdő"					<rollershutter> (gRedonyEsteLe, gRedonyFsz, gRedony) {channel="mysensors:cover:gateway:Cover_52_2:cover"}
+
+
+
+
+Switch  weckerMontag     "Hétfő"     <switch>  (gWeckerWochentage) 
+Switch  weckerDienstag   "Kedd"   <switch>  (gWeckerWochentage) 
+Switch  weckerMittwoch   "Szerda"   <switch>  (gWeckerWochentage) 
+Switch  weckerDonnerstag "Csütörtök" <switch>  (gWeckerWochentage) 
+Switch  weckerFreitag    "Péntek"    <switch>  (gWeckerWochentage) 
+Switch  weckerSamstag    "Szombat"    <switch>  (gWeckerWochentage) 
+Switch  weckerSonntag    "Vasárnap"    <switch>  (gWeckerWochentage) 
+
+String weckerZeitMessage "%s"
+
+Number weckerZeitStunde "Óra [%d]" <clock> (gWeckerZeit)
+Number weckerZeitMinute "Perc [%d]" <clock> (gWeckerZeit)
+Number weckerRolladePerc "Százalék [%d]"
+
+DateTime	abendDusk 		"Szürkület [%d]" <clock> {channel="astro:sun:home:nauticDusk#start"}
+Switch	abendDuskEnable	"Szürkület engedélyez"	<switch>
+Switch 	csakHaloFelEnable "Csak halo fel" <switch>
+
+Switch  abendMontag     "Hétfő"     <switch>  (gWeckerWochentage) 
+Switch  abendDienstag   "Kedd"   <switch>  (gWeckerWochentage) 
+Switch  abendMittwoch   "Szerda"   <switch>  (gWeckerWochentage) 
+Switch  abendDonnerstag "Csütörtök" <switch>  (gWeckerWochentage) 
+Switch  abendFreitag    "Péntek"    <switch>  (gWeckerWochentage) 
+Switch  abendSamstag    "Szombat"    <switch>  (gWeckerWochentage) 
+Switch  abendSonntag    "Vasárnap"    <switch>  (gWeckerWochentage) 
+
+String abendZeitMessage "%s"
+
+Number abendZeitStunde "Óra [%d]" <clock> (gWeckerZeit)
+Number abendZeitMinute "Perc [%d]" <clock> (gWeckerZeit)
+Number abendRolladePerc "Részben lehúzott [%d]"
+Number abendBeforeDusk	"Alkonyat elött [%d]"
+
+
+Switch Kapcsolo1 		"Kapcsolo 1" <switch> {channel="mysensors:light:gateway:Relay_12_1:status"}
+
+
+Number Hom_kulso 	"Külső hőmérséklet [%.1f °C]" <temperature> {channel="yahooweather:weather:home:temperature" }
+
+Number	Hom_bent1	"Hőmérséklet dolgozó [%.1f °C]" <temperature> {channel="mysensors:temperature:gateway:Temp_10_1:temp"}
+Number	Par_bent1	"Páratartalom dolgozó [%.1f %%]" <humidity> {channel="mysensors:humidity:gateway:Hum_10_0:hum"}
+Contact	Mozg_bent1	"Mozgásérzékelő dolgozó  [%d]" <motion> {channel="mysensors:motion:gateway:Mot_10_2:tripped"}
+
+//Number	Hom_bent3	"Hőmérséklet BB [%.1f °C]" <temperature> {channel="mysensors:temperature:gateway:Temp_31_1:temp"}
+//Number	Par_bent3	"Páratartalom BB [%.1f %%]" <humidity> {channel="mysensors:humidity:gateway:Hum_31_0:hum"}
+//Contact	Mozg_bent3	"Mozgásérzékelő BB  [%d]" <motion> {channel="mysensors:motion:gateway:Mot_31_2:tripped"}
+//Number	Feny_bent3	"Fényérzékelő BB  [%.1f]" <light> {channel="mysensors:light-level:gateway:Light_31_3:light-level"}
+
+
+Number	Hom_bent2	"Hőmérséklet fent [%.1f °C]" <temperature> {channel="mysensors:temperature:gateway:Temp_11_1:temp"}
+Number	Par_bent2	"Páratartalom fent [%.1f %%]" <humidity> {channel="mysensors:humidity:gateway:Hum_11_0:hum"}
+
+Number Weather_Temperature		"Outside Temperature [%.1f °C]"		<temperature> {weather="locationId=homeW, type=temperature, property=current"}
+Number Weather_Temperature_Tomorrow_max		"Temp. tomorrow max [%.1f °C]"		<temperature> {weather="locationId=homeW, forecast=1, type=temperature, property=max"}
+Number Weather_Temperature_Tomorrow_min		"Temp. tomorrow min [%.1f °C]"		<temperature> {weather="locationId=homeW, forecast=1, type=temperature, property=min"}
+
+Number Weather_Precip_Probability		"Precipiation  [%d %%]"		 {weather="locationId=homeW, type=precipitation, property=probability"}
+Number Weather_Precip_Probability_Tomorrow		"Precipiation tomorrow [%d %%]"	 {weather="locationId=homeW, forecast=1, type=precipitation, property=probability"}
+
+String Weather_Condition		"Condition [%s]"		 {weather="locationId=homeW, type=condition, property=text"}
+String Weather_Condition_Tomorrow		"Condition tomorrow [%s]"		 {weather="locationId=homeW, forecast=1, type=condition, property=text"}

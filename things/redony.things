@@ -1,0 +1,59 @@
+//mySensorsMessage mySMsg01   [ nodeId="999", childId="999" ]
+
+Bridge mysensors:bridge-ser:gateway [ serialPort="/dev/ttyAMA0", sendDelay=733, baudRate=38400, enableNetworkSanCheck=false  ] {
+	cover	Cover_51_0	[nodeId=51, childId=0, requestAck=true, revertState=true]
+	cover	Cover_51_1	[nodeId=51, childId=1, requestAck=true, revertState=true]
+	cover	Cover_51_2	[nodeId=51, childId=2, requestAck=true, revertState=true]
+	cover	Cover_51_3	[nodeId=51, childId=3, requestAck=true, revertState=true]
+	
+	cover	Cover_52_0	[nodeId=52, childId=0, requestAck=true, revertState=true]
+	cover	Cover_52_1	[nodeId=52, childId=1, requestAck=true, revertState=true]
+	cover	Cover_52_2	[nodeId=52, childId=2, requestAck=true, revertState=true]
+	cover	Cover_52_3	[nodeId=52, childId=3, requestAck=true, revertState=true]
+
+
+	cover	Cover_53_0	[nodeId=53, childId=0, requestAck=true, revertState=true]
+	cover	Cover_53_1	[nodeId=53, childId=1, requestAck=true, revertState=true]
+	cover	Cover_53_2	[nodeId=53, childId=2, requestAck=true, revertState=true]
+	cover	Cover_53_3	[nodeId=53, childId=3, requestAck=true, revertState=true]
+	cover	Cover_53_4	[nodeId=53, childId=4, requestAck=true, revertState=true]
+		
+	//teszt	
+	cover	Cover_90_0	[nodeId=90, childId=0, requestAck=true, revertState=true]
+	cover	Cover_90_1	[nodeId=90, childId=1, requestAck=true, revertState=true]
+	
+	customSensor	Cover_51_0_var	[nodeId=51, childId=0, requestAck=true, revertState=true]
+	customSensor	Cover_51_1_var	[nodeId=51, childId=1, requestAck=true, revertState=true]
+	customSensor	Cover_51_2_var	[nodeId=51, childId=2, requestAck=true, revertState=true]
+	customSensor	Cover_51_3_var	[nodeId=51, childId=3, requestAck=true, revertState=true]
+	
+	customSensor	Cover_52_0_var	[nodeId=52, childId=0, requestAck=true, revertState=true]
+	customSensor	Cover_52_1_var	[nodeId=52, childId=1, requestAck=true, revertState=true]
+	customSensor	Cover_52_2_var	[nodeId=52, childId=2, requestAck=true, revertState=true]
+	customSensor	Cover_52_3_var	[nodeId=52, childId=3, requestAck=true, revertState=true]
+
+	customSensor	Cover_53_0_var	[nodeId=53, childId=0, requestAck=true, revertState=true]
+	customSensor	Cover_53_1_var	[nodeId=53, childId=1, requestAck=true, revertState=true]
+	customSensor	Cover_53_2_var	[nodeId=53, childId=2, requestAck=true, revertState=true]
+	customSensor	Cover_53_3_var	[nodeId=53, childId=3, requestAck=true, revertState=true]
+	customSensor	Cover_53_4_var	[nodeId=53, childId=4, requestAck=true, revertState=true]
+	
+	temperature		Temp_10_1	[nodeId=10, childId=1]
+	humidity		Hum_10_0	[nodeId=10, childId=0]
+	motion			Mot_10_2	[nodeId=10, childId=2]
+	
+	temperature		Temp_11_1	[nodeId=11, childId=1]
+	humidity		Hum_11_0	[nodeId=11, childId=0]
+	
+	temperature		Temp_31_1	[nodeId=31, childId=1]
+	humidity		Hum_31_0	[nodeId=31, childId=0]
+	motion			Mot_31_2	[nodeId=31, childId=2]
+	light-level		Light_31_3	[nodeId=31, childId=3]
+	
+	light			Relay_12_1	[nodeId=12, childId=1, requestAck=true, revertState=true]
+	light			Relay_12_2	[nodeId=12, childId=2, requestAck=true, revertState=true]	
+  }
+  
+  
+astro:sun:home  [ geolocation="49.4979,19.0402", interval=86400]
+// yahooweather:weather:home [ location=12593831, interval=3600]

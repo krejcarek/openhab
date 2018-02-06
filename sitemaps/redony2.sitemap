@@ -1,0 +1,168 @@
+sitemap redony2 label="Redony vezerles" {
+
+Frame label="Csoportos" icon="house" {
+Switch item= Redony label="Mind [(%d)]" mappings=[UP="Fel", STOP="Stop", DOWN="Le"]
+Switch item= RedonyFsz label="Földszint [(%d)]" mappings=[UP="Fel", STOP="Stop", DOWN="Le"]
+Switch item= RedonyEm label="Emelet [(%d)]" mappings=[UP="Fel", STOP="Stop", DOWN="Le"]
+//Switch item= RedonyTeszt label="Teszt [(%d)]" mappings=[UP="Fel", STOP="Stop", DOWN="Le"]
+}
+
+Frame label="Emelet" icon="firstfloor" {
+
+Switch item=redony_EM_LANY label="Lányszoba" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_EM_LANY label="" switchSupport
+Setpoint item=redony_EM_LANY label="" minValue=-10 maxValue=110 step=10 
+
+Switch item=redony_EM_FIU label="Fiúszoba" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_EM_FIU label="" switchSupport
+Setpoint item=redony_EM_FIU label="" minValue=-10 maxValue=110 step=10
+
+Switch item=redony_EM_HAL label="Háló" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_EM_HAL label="" switchSupport
+Setpoint item=redony_EM_HAL label="" minValue=-10 maxValue=110 step=10
+
+Switch item=redony_EM_GAR label="Gardrób" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_EM_GAR label="" switchSupport
+Setpoint item=redony_EM_GAR label="" minValue=-10 maxValue=110 step=10
+
+}
+Frame label="Földszint" icon="groundfloor" {
+Switch item=redony_FSZ_NOLD label="Nappali oldalsó" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_FSZ_NOLD label="" switchSupport
+Setpoint item=redony_FSZ_NOLD label="" minValue=-10 maxValue=110 step=10 
+
+Switch item=redony_FSZ_NKF label="Nappali kis-fix" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_FSZ_NKF label="" switchSupport
+Setpoint item=redony_FSZ_NKF label="" minValue=-10 maxValue=110 step=10 
+
+Switch item=redony_FSZ_NTF label="Nappali toló-fix" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_FSZ_NTF label="" switchSupport
+Setpoint item=redony_FSZ_NTF label="" minValue=-10 maxValue=110 step=10 
+
+Switch item=redony_FSZ_NTNY label="Nappali toló-nyitható" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_FSZ_NTNY label="" switchSupport 
+Setpoint item=redony_FSZ_NTNY label="" minValue=-10 maxValue=110 step=10 
+
+Switch item=redony_FSZ_NKET label="Nappali kétszárnyú" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_FSZ_NKET label="" switchSupport 
+Setpoint item=redony_FSZ_NKET label="" minValue=-10 maxValue=110 step=10 
+
+Switch item=redony_FSZ_DOL label="Dolgozó" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_FSZ_DOL label="" switchSupport
+Setpoint item=redony_FSZ_DOL label="" minValue=-10 maxValue=110 step=10
+
+Switch item=redony_FSZ_VEN label="Vendégszoba" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_FSZ_VEN label="" switchSupport
+Setpoint item=redony_FSZ_VEN label="" minValue=-10 maxValue=110 step=10
+
+Switch item=redony_FSZ_KNYH label="Konyha" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_FSZ_KNYH label="" switchSupport
+Setpoint item=redony_FSZ_KNYH label="" minValue=-10 maxValue=110 step=10
+
+Switch item=redony_FSZ_FRD label="Fürdő" mappings=[0="Fel", STOP="Stop", 100="Le"]
+Slider item=redony_FSZ_FRD label="" switchSupport
+Setpoint item=redony_FSZ_FRD label="" minValue=-10 maxValue=110 step=10
+}
+/*
+Frame label="Teszt" icon="groundfloor" {
+
+Switch item=redony_t1 label="t1"
+Slider item=redony_t1 label="" switchSupport
+Setpoint item=redony_t1 label="" minValue=-10 maxValue=110 step=10
+
+Switch item=redony_t2 label="t2"
+Slider item=redony_t2 label="" switchSupport
+Setpoint item=redony_t2 label="" minValue=-10 maxValue=110 step=10
+}
+*/
+
+
+Frame label="Automatizálás" {
+
+
+    Text label="Ébresztő [%s]" item=weckerZeitMessage icon="clock" {
+        Frame label="Idő" {
+            Setpoint item=weckerZeitStunde minValue=0 maxValue=23 step=1
+            Setpoint item=weckerZeitMinute minValue=0 maxValue=55 step=5
+            Setpoint item=weckerRolladePerc icon="rollershutter" step=10
+            Switch item=csakHaloFelEnable
+        }
+        Frame label="Hét napjai" {
+            Switch item=weckerMontag
+            Switch item=weckerDienstag
+            Switch item=weckerMittwoch
+            Switch item=weckerDonnerstag
+            Switch item=weckerFreitag
+            Switch item=weckerSamstag
+            Switch item=weckerSonntag
+        }
+    }
+   
+    Text label="Este Lehúz [%s]" item=abendZeitMessage icon="clock" {
+            Frame label="" {
+            	Switch item=abendDuskEnable icon="dusk"
+            	Setpoint item=abendRolladePerc icon="rollershutter" step=10
+            	Setpoint item=abendBeforeDusk minValue=0 maxValue=55 step=1
+            	
+            }
+            Frame label="Manuális Idő" visibility=[abendDuskEnable==OFF]{
+                Setpoint item=abendZeitStunde minValue=0 maxValue=23 step=1
+                Setpoint item=abendZeitMinute minValue=0 maxValue=55 step=5
+
+            }
+            Frame label="Hét napjai" {
+                Switch item=abendMontag
+                Switch item=abendDienstag
+                Switch item=abendMittwoch
+                Switch item=abendDonnerstag
+                Switch item=abendFreitag
+                Switch item=abendSamstag
+                Switch item=abendSonntag
+            }
+        }
+}   
+
+
+	Frame label="Lámpák" icon="firstfloor" {
+   		Switch item=Kapcsolo1	label="Földgömb Dolgozó"
+   		
+   		//Switch item=MiLight_Box	label="MiLight_Box"
+   		//Slider item=MiLight_Box	label="MiLight_Box"
+   		Colorpicker item=MiLight_Box_Color	label="MiLight_Box"
+
+   		//Switch item=MiLight_Nappali	label="Nappali"
+   		Colorpicker item=MiLight_Nappali_Color	label="Nappali"
+   		Switch item=MiLight_Nappali_Nightmode	label="Nappali éjszakai" mappings=[ON='Night Mode']
+
+   		
+	}
+	Frame label="Szenzorok" icon="firstfloor"{
+		//Text item=Hom_bent3
+		//Text item=Par_bent3
+		//Text item=Mozg_bent3
+		//Text item=Feny_bent3
+		Text item=Hom_bent1
+		Text item=Par_bent1
+		Text item=Mozg_bent1
+		Text item=Hom_bent2
+		Text item=Par_bent2
+		Text item=Weather_Temperature
+		Text item=Weather_Temperature_Tomorrow_max
+		Text item=Weather_Temperature_Tomorrow_min
+		//Text item=Weather_Clouds
+		//Text item=Weather_Clouds_Tomorrow
+		Text item=Weather_Precip_Probability
+		Text item=Weather_Precip_Probability_Tomorrow
+		Text item=Weather_Condition
+		Text item=Weather_Condition_Tomorrow
+		
+	}
+
+
+Frame label="Log" {
+		Text label="openHAB Eventlog" icon="office" {
+         Webview url="http://192.168.100.107:9001" height=20
+	}
+		
+}
+}

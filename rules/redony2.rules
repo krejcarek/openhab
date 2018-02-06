@@ -1,0 +1,418 @@
+import java.util.concurrent.locks.ReentrantLock
+import org.eclipse.smarthome.core.library.types.DecimalType
+import org.eclipse.smarthome.model.script.actions.Timer
+
+var Timer timer1 = null
+var ReentrantLock lock1 = new ReentrantLock()
+
+var Timer timer2 = null
+var ReentrantLock lock2 = new ReentrantLock()
+
+var Timer timer3 = null
+var ReentrantLock lock3 = new ReentrantLock()
+
+
+rule "Initialization"
+ when 
+   System started
+ then
+     postUpdate(weckerZeitStunde, 06)
+     postUpdate(weckerZeitMinute, 45)
+     postUpdate(weckerMontag,     ON)
+     postUpdate(weckerDienstag,   ON)
+     postUpdate(weckerMittwoch,   ON)
+     postUpdate(weckerDonnerstag, ON)
+     postUpdate(weckerFreitag,    ON)
+     postUpdate(weckerSamstag,    OFF)
+     postUpdate(weckerSonntag,    OFF)
+     postUpdate(weckerRolladePerc,    50)
+     
+     postUpdate(abendZeitStunde, 16)
+     postUpdate(abendZeitMinute, 20)
+     postUpdate(abendMontag,     ON)
+     postUpdate(abendDienstag,   ON)
+     postUpdate(abendMittwoch,   ON)
+     postUpdate(abendDonnerstag, ON)
+     postUpdate(abendFreitag,    ON)
+     postUpdate(abendSamstag,    ON)
+     postUpdate(abendSonntag,    ON)
+     postUpdate(abendRolladePerc,    50)
+     postUpdate(csakHaloFelEnable, ON)
+     postUpdate(abendBeforeDusk, 15)
+     
+ end 
+
+rule "Weckzeit"
+when
+    Item weckerZeitStunde changed or 
+    Item weckerZeitMinute changed or
+    System started
+then
+  // If the UI to change the Alarm time is clicked several times the code below
+  // is subject to race conditions. Therefore we make sure that all events 
+  // are processed one after the other.
+  lock1.lock()
+  try {
+    var String msg = ""
+
+    // Copy the Alarm-Time from the UI to local variables
+    var stunde = weckerZeitStunde.state as DecimalType
+    var minute = weckerZeitMinute.state as DecimalType
+
+    // Combine the hour and minutes to one string to be displayed in the 
+    // user interface
+    if (stunde.intValue < 10) { msg = "0" } 
+    msg = msg + weckerZeitStunde.state.format("%d") + ":"
+
+    if (minute.intValue < 10) { msg = msg + "0" }
+    msg = msg + weckerZeitMinute.state.format("%d")
+    postUpdate(weckerZeitMessage,msg)
+
+    // calculate the alarm time [min]
+    var int weckzeit1
+    weckzeit1 = (weckerZeitStunde.state as DecimalType).intValue * 60 + 
+                (weckerZeitMinute.state as DecimalType).intValue
+    weckzeit1 = weckzeit1.intValue
+
+    // calculate current time [min]
+    var int jetzt1
+    jetzt1 = now.getMinuteOfDay
+    jetzt1 = jetzt1.intValue
+
+    // calculate the difference between the requested alarm time and 
+    // current time (again in minutes)  
+    var int delta1
+    delta1 = (weckzeit1 - jetzt1)
+    delta1 = delta1.intValue
+
+    // add one day (1440 minutes) if alarm time for today already passed
+    if (jetzt1 > weckzeit1) { delta1 = delta1 + 1440 }
+
+    // check if there is already an alarm timer; cancel it if present
+    if (timer1 != null) {
+       timer1.cancel
+       timer1 = null
+    }
+   
+
+    // create a new timer using the calculated delta [min]
+    timer1 = createTimer(now.plusMinutes(delta1)) [|
+        // This code will be executed if the timer triggers
+        // ************************************************
+        // check if alarm clock is armed for this weekday
+        var Number day = now.getDayOfWeek
+        if (((day == 1) && (weckerMontag.state == ON))     ||
+            ((day == 2) && (weckerDienstag.state == ON))   ||
+            ((day == 3) && (weckerMittwoch.state == ON))   ||
+            ((day == 4) && (weckerDonnerstag.state == ON)) ||
+            ((day == 5) && (weckerFreitag.state == ON))    ||
+            ((day == 6) && (weckerSamstag.state == ON))    ||
+            ((day == 7) && (weckerSonntag.state == ON))) {
+                // The things to do if the alarm clock is enabled for this day of week: 
+                // ...
+                // ...
+                //gRedonyTeszt.sendCommand(weckerRolladePerc.state.toString())
+                if (csakHaloFelEnable.state==ON) {
+                	gRedonyHaloszobak.sendCommand(weckerRolladePerc.state.toString())
+                } else{
+                	gRedonyFsz.sendCommand(0)
+                	gRedonyEm.sendCommand(weckerRolladePerc.state.toString())
+                }
+           }
+           // Re-Arm the timer to trigger again tomorrow (same time) 
+           timer1.reschedule(now.plusHours(24))
+        // ************************************************
+        // Here the code ends that executes once the timer triggers 
+        ]
+  } finally  {
+     // release the lock - we are ready to process the next event
+     lock1.unlock()
+  }
+end
+
+rule "este lehuz"
+when
+    Item abendDusk changed or
+    Item abendDuskEnable changed or
+    Item abendZeitStunde changed or 
+    Item abendZeitMinute changed or
+    System started    
+then
+	  // If the UI to change the Alarm time is clicked several times the code below
+  // is subject to race conditions. Therefore we make sure that all events 
+  // are processed one after the other.
+  lock2.lock()
+  try {
+    var String msg = ""
+
+    // Copy the Alarm-Time from the UI to local variables
+
+    if (abendDuskEnable.state == ON){
+		msg=abendDusk.state.format("%1$tk:%1$tM")+"-"+abendBeforeDusk.state.format("%d")
+    	}
+    else {
+    	var DecimalType stunde
+    	var DecimalType minute
+    	stunde = abendZeitStunde.state as DecimalType
+    	minute = abendZeitMinute.state as DecimalType
+    	if (stunde.intValue < 10) { msg = "0" } 
+    	msg = msg + abendZeitStunde.state.format("%d") + ":"
+
+    	if (minute.intValue < 10) { msg = msg + "0" }
+    	msg = msg + abendZeitMinute.state.format("%d")
+    	}     
+
+	postUpdate(abendZeitMessage,msg)
+	
+    // Combine the hour and minutes to one string to be displayed in the 
+    // user interface
+    
+
+    // calculate the alarm time [min]
+    var int abendzeit1
+     if (abendDuskEnable.state == ON){
+    	abendzeit1 = Integer::parseInt(abendDusk.state.format("%1$tk"))*60 + Integer::parseInt(abendDusk.state.format("%1$tM"))
+    	abendzeit1=abendzeit1.intValue-(abendBeforeDusk.state as DecimalType).intValue
+    }
+    else {
+    	abendzeit1 = (abendZeitStunde.state as DecimalType).intValue * 60 + (abendZeitMinute.state as DecimalType).intValue
+    }   
+    //abendzeit1 = abendzeit1.intValue
+
+    // calculate current time [min]
+    var int jetzt1
+    jetzt1 = now.getMinuteOfDay
+    jetzt1 = jetzt1.intValue
+
+    // calculate the difference between the requested alarm time and 
+    // current time (again in minutes)  
+    var int delta1
+    delta1 = (abendzeit1 - jetzt1)
+    delta1 = delta1.intValue
+
+    // add one day (1440 minutes) if alarm time for today already passed
+    if (jetzt1 > abendzeit1) { delta1 = delta1 + 1440 }
+
+    // check if there is already an alarm timer; cancel it if present
+    if (timer2 != null) {
+       timer2.cancel
+       timer2 = null
+    }
+    // create a new timer using the calculated delta [min]
+    timer2 = createTimer(now.plusMinutes(delta1)) [|
+        // This code will be executed if the timer triggers
+        // ************************************************
+        // check if alarm clock is armed for this weekday
+        var Number day = now.getDayOfWeek
+        if (((day == 1) && (abendMontag.state == ON))     ||
+            ((day == 2) && (abendDienstag.state == ON))   ||
+            ((day == 3) && (abendMittwoch.state == ON))   ||
+            ((day == 4) && (abendDonnerstag.state == ON)) ||
+            ((day == 5) && (abendFreitag.state == ON))    ||
+            ((day == 6) && (abendSamstag.state == ON))    ||
+            ((day == 7) && (abendSonntag.state == ON))) {
+                // The things to do if the alarm clock is enabled for this day of week: 
+                // ...
+                // ...
+                //gRedonyTeszt.sendCommand(100)
+                RedonyEsteLe.sendCommand(100)
+                RedonyEsteReszbenLe.sendCommand(abendRolladePerc.state.toString())
+                Kapcsolo1.sendCommand("ON")
+                
+           }
+           // Re-Arm the timer to trigger again tomorrow (same time) 
+           timer2.reschedule(now.plusHours(24))
+        // ************************************************
+        // Here the code ends that executes once the timer triggers 
+        ]
+
+
+  } finally  {
+     // release the lock - we are ready to process the next event
+     lock2.unlock()
+  }
+end
+
+
+rule "Foldgomb ki"
+when
+    Time is midnight
+then
+	Kapcsolo1.sendCommand("OFF")
+end
+
+
+rule "RedonyEsteLe"
+when
+    Item RedonyEsteLe received command or
+    Item hk_RedonyEsteLe received command
+then
+	gRedonyEsteLe?.members.forEach[item|
+		item.sendCommand(receivedCommand)
+		Thread::sleep(1100)
+	]
+end
+
+rule "RedonyEsteReszbenLe"
+when
+    Item RedonyEsteReszbenLe received command or
+    Item hk_RedonyEsteReszbenLe received command
+then
+	gRedonyEsteReszbenLe?.members.forEach[item|
+		item.sendCommand(receivedCommand)
+		Thread::sleep(1000)
+	]
+end
+
+rule "Redony"
+when
+    Item Redony received command or
+    Item hk_Redony received command
+then
+	gRedony?.members.forEach[item|
+		if(((receivedCommand==UP)||(receivedCommand==0))&&(item.state>0)) {
+			item.sendCommand(0)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand==DOWN)||(receivedCommand==100))&&(item.state<100)) {
+			item.sendCommand(100)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand>0)||(receivedCommand<100))&&(item.state!=receivedCommand)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+		if((receivedCommand==STOP)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+	]
+end
+
+rule "RedonyFsz"
+when
+    Item RedonyFsz received command or
+    Item hk_RedonyFsz received command
+then
+	gRedonyFsz?.members.forEach[item|
+		if(((receivedCommand==UP)||(receivedCommand==0))&&(item.state>0)) {
+			item.sendCommand(0)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand==DOWN)||(receivedCommand==100))&&(item.state<100)) {
+			item.sendCommand(100)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand>0)||(receivedCommand<100))&&(item.state!=receivedCommand)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+		if((receivedCommand==STOP)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+	]
+end
+
+rule "RedonyEm"
+when
+    Item RedonyEm received command or
+    Item hk_RedonyEm received command
+    
+then
+	gRedonyEm?.members.forEach[item|
+		if(((receivedCommand==UP)||(receivedCommand==0))&&(item.state>0)) {
+			item.sendCommand(0)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand==DOWN)||(receivedCommand==100))&&(item.state<100)) {
+			item.sendCommand(100)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand>0)||(receivedCommand<100))&&(item.state!=receivedCommand)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+		if((receivedCommand==STOP)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+	]
+end
+
+rule "RedonyHaloszobak"
+when
+    Item RedonyHaloszobak received command or
+    Item hk_RedonyHaloszobak received command
+    
+then
+	gRedonyHaloszobak?.members.forEach[item|
+		if(((receivedCommand==UP)||(receivedCommand==0))&&(item.state>0)) {
+			item.sendCommand(0)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand==DOWN)||(receivedCommand==100))&&(item.state<100)) {
+			item.sendCommand(100)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand>0)||(receivedCommand<100))&&(item.state!=receivedCommand)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+		if((receivedCommand==STOP)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+	]
+end
+
+rule "RedonyTeszt"
+when
+    Item RedonyTeszt received command or
+    Item hk_RedonyTeszt received command
+then
+	gRedonyTeszt?.members.forEach [ item |
+		if(((receivedCommand==UP)||(receivedCommand==0))&&(item.state>0)) {
+			item.sendCommand(0)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand==DOWN)||(receivedCommand==100))&&(item.state<100)) {
+			item.sendCommand(100)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand>0)||(receivedCommand<100))&&(item.state!=receivedCommand)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+		if((receivedCommand==STOP)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+	]
+	//sendBroadcastNotification("Hello world!")
+end
+
+rule "RedonyNappali"
+when
+    Item RedonyNappali received command or
+    Item hk_RedonyNappali received command
+then
+	gRedonyNappali?.members.forEach [ item |
+		if(((receivedCommand==UP)||(receivedCommand==0))&&(item.state>0)) {
+			item.sendCommand(0)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand==DOWN)||(receivedCommand==100))&&(item.state<100)) {
+			item.sendCommand(100)
+			Thread::sleep(1000)
+		}
+		if(((receivedCommand>0)||(receivedCommand<100))&&(item.state!=receivedCommand)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+		if((receivedCommand==STOP)) {
+			item.sendCommand(receivedCommand)
+			Thread::sleep(1000)
+		}
+	]
+end

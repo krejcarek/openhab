@@ -1,0 +1,18 @@
+String iPhone7_Battery "iPhone7 Batterie [%s]" <battery> (IOS)
+String iPhone7_Battery_Status "iPhone7 Batterie Status [%s]" <battery> (IOS)
+Number iPhone7_Battery_Level "iPhone7 Batterie Level [%.0f]" <battery> (IOS)
+String iPhone7_Location "iPhone7 Location [%s]" <suitcase> (IOS)
+DateTime iPhone7_Location_Timestamp "iPhone7 Location Last Update [%1$td.%1$tm.%1$tY, %1$tH:%1$tM]" <suitcase> (IOS)
+Number iPhone7_Coordinates_Accuracy "iPhone7 Koordinaten HDOP [%.0f]" <suitcase> (IOS)
+Location iPhone7_Coordinates "iPhone7 Koordinaten" <suitcase> (IOS)
+String iPhone7_Location_Address "iPhone7 Location Address [%s]" (IOS)
+
+//Agi
+String iPhone5_Battery "iPhone5 Batterie [%s]" <battery> (IOS)
+String iPhone5_Battery_Status "iPhone5 Batterie Status [%s]" <battery> (IOS)
+Number iPhone5_Battery_Level "iPhone5 Batterie Level [%.0f]" <battery> (IOS)
+String iPhone5_Location "iPhone5 Location [%s]" <suitcase> (IOS)
+DateTime iPhone5_Location_Timestamp "iPhone5 Location Last Update [%1$td.%1$tm.%1$tY, %1$tH:%1$tM]" <suitcase> (IOS)
+Number iPhone5_Coordinates_Accuracy "iPhone5 Koordinaten HDOP [%.0f]" <suitcase> (IOS)
+Location iPhone5_Coordinates "iPhone5 Koordinaten" <suitcase> (IOS)
+String iPhone5_Location_Address "iPhone5 Location Address [%s]" (IOS)

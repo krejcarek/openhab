@@ -1,0 +1,23 @@
+import java.util.concurrent.locks.ReentrantLock
+
+var ReentrantLock lock_Mozg = new ReentrantLock()
+
+
+rule "Mozgas"
+when
+    Item Mozg_bent1 changed to OPEN 
+then
+  lock_Mozg.lock()
+  try {
+
+  	MiLight_Box.sendCommand(ON);
+  	Thread::sleep(15000);
+  	MiLight_Box.sendCommand(OFF);
+	
+
+ } finally  {
+     // release the lock - we are ready to process the next event
+     lock_Mozg.unlock();
+	
+}
+end

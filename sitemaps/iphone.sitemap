@@ -1,0 +1,16 @@
+sitemap iphone label="Iphone" {
+	Frame label="Mate"{
+ 		Text item=iPhone7_Battery_Status 
+ 		Text item=iPhone7_Battery_Level 
+ 		Text item=iPhone7_Location_Timestamp 
+ 		Text item=iPhone7_Location_Address
+ 		}
+ 	Frame label="Agi"{
+ 		Text item=iPhone5_Battery_Status 
+ 		Text item=iPhone5_Battery_Level 
+ 		Text item=iPhone5_Location_Timestamp 
+ 		Text item=iPhone5_Location_Address
+ 		}
+}
+
+

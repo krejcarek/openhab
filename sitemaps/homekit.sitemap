@@ -1,0 +1,5 @@
+
+sitemap homekit label="for Homekit..." {
+	//Switch item=KitchenLights label="Arbeitszimmer"
+
+}

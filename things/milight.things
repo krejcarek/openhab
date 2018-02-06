@@ -1,0 +1,4 @@
+Bridge milight:bridgeV6:F0FE6BA2F970 [ ADDR="192.168.100.13", ID="F0FE6BA2F970" ] {
+    Thing rgbiboxLed 0
+    Thing rgbwwLed 1
+}

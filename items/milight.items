@@ -1,0 +1,33 @@
+Dimmer MiLight_Box    {channel="milight:rgbiboxLed:F0FE6BA2F970:0:ledbrightness", autoupdate="false"}
+Color MiLight_Box_Color   <slider> {channel="milight:rgbiboxLed:F0FE6BA2F970:0:ledcolor"}
+
+Dimmer MiLight_Nappali    {channel="milight:rgbwwLed:F0FE6BA2F970:1:ledbrightness"}
+Color MiLight_Nappali_Color    {channel="milight:rgbwwLed:F0FE6BA2F970:1:ledcolor"}
+Dimmer MiLight_Nappali_Temperature    {channel="milight:rgbwwLed:F0FE6BA2F970:1:ledtemperature"}
+Dimmer MiLight_Nappali_Saturation    {channel="milight:rgbwwLed:F0FE6BA2F970:1:ledsaturation"}
+Switch MiLight_Nappali_Nightmode    {channel="milight:rgbwwLed:F0FE6BA2F970:1:lednightmode", autoupdate="false"}
+Dimmer MiLight_Nappali_Animation_mode    {channel="milight:rgbwwLed:F0FE6BA2F970:1:animation_mode"}
+Dimmer MiLight_Nappali_Animaiton_speed    {channel="milight:rgbwwLed:F0FE6BA2F970:1:animation_speed_relative"}
+
+
+/*
+Dimmer Light_LivingroomB    {channel="milight:whiteLed:F0FE6BA2F970:1:ledbrightness"} # Dimmer changing brightness for bulb in zone 1
+Dimmer Light_LivingroomC    {channel="milight:whiteLed:F0FE6BA2F970:1:ledtemperature"} # Dimmer changing colorTemperature for bulb in zone 1
+Dimmer RGBW_LivingroomB     {channel="milight:rgbwLed:F0FE6BA2F970:2:ledbrightness"} # Dimmer changing brightness for RGBW bulb in zone 2
+Color Light_Party           {channel="milight:rgbwLed:F0FE6BA2F970:1:ledcolor"}# Colorpicker for rgb bulbs
+
+# You have to link the items to the channels of your prefered group e.g. in paperui after you've saved
+# your items file.
+
+# The command types nightMode and whiteMode are stateless and should be configured as pushbuttons as they only support a trigger action:
+Switch Light_GroundfloorN   {channel="milight:whiteLed:ACCF23A6C0B4:0:lednightmode", autoupdate="false"} # Activate the NightMode for all bulbs
+
+# The command types animation_mode_relative and animation_speed are stateless and should be configured as pushbuttons as they only support INCREASE and DECREASE commands:
+
+Dimmer AnimationMode		{channel="milight:rgbLed:ACCF23A6C0B4:5:animation_mode_relative", autoupdate="false"}
+Dimmer AnimationSpeed	{channel="milight:rgbLed:ACCF23A6C0B4:5:animation_speed", autoupdate="false"}
+
+# Animation Mode for RGBWW bulbs is different, it allows to pick a mode directly.
+
+Switch AnimationModeRgbWW {channel="milight:rgbwwLed:ACCF23A6C0B4:5:animation_mode"}
+*/

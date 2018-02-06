@@ -1,0 +1,40 @@
+
+
+String mySMsg01 "MySensorsMessage"   { channel="mysensors:mySensorsMessage:gateway:mySMsg01:mySensorsMessage" }
+
+
+
+Group gRedonySettings "Redony allitas" <number> [ "home-group" ]
+
+Number	redony_EM_HAL_FEL	"em Halo_FEL"					<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_51_0_var:var1"}
+Number	redony_EM_GAR_FEL	"em Gardrob_FEL"				<number> (gRedonySettings) [ "home-group" ]	 {channel="mysensors:customSensor:gateway:Cover_51_1_var:var1"}
+Number   redony_EM_FIU_FEL	"em Fiuszoba_FEL"   			<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_53_4_var:var1"}
+Number   redony_EM_LANY_FEL	"em Lanyszoba_FEL"  			<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_53_3_var:var1"}
+
+Number   redony_FSZ_VEN_FEL	"fsz Vendeg_FEL"				<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_51_2_var:var1"}
+Number   redony_FSZ_DOL_FEL	"fsz Dolgozo_FEL"				<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_51_3_var:var1"}
+Number   redony_FSZ_NOLD_FEL	"fsz Nappali oldalsó_FEL"		<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_52_0_var:var1"}
+Number   redony_FSZ_NKF_FEL	"fsz Nappali kis-fix_FEL"       <number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_52_3_var:var1"}
+Number   redony_FSZ_NTF_FEL	"fsz Nappali toló-fix_FEL"		<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_53_0_var:var1"}
+Number   redony_FSZ_NTNY_FEL	"fsz Nappali toló-nyitható_FEL"	<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_53_1_var:var1"}
+Number   redony_FSZ_NKET_FEL	"fsz Nappali kétszárnyú_FEL"	<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_53_2_var:var1"}
+Number   redony_FSZ_KNYH_FEL	"fsz Konyha_FEL"	<number> (gRedonySettings) [ "home-group" ]  {channel="mysensors:customSensor:gateway:Cover_52_1_var:var1"}
+Number   redony_FSZ_FRD_FEL	"fsz Fürdő_FEL"	<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_52_2_var:var1"}
+
+
+Number	redony_EM_HAL_LE	"em Halo_LE"					<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_51_0_var:var2"}
+Number	redony_EM_GAR_LE	"em Gardrob_LE"				<number> (gRedonySettings) [ "home-group" ]	 {channel="mysensors:customSensor:gateway:Cover_51_1_var:var2"}
+Number   redony_EM_FIU_LE	"em Fiuszoba_LE"   			<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_53_4_var:var2"}
+Number   redony_EM_LANY_LE	"em Lanyszoba_LE"  			<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_53_3_var:var2"}
+
+Number   redony_FSZ_VEN_LE	"fsz Vendeg_LE"				<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_51_2_var:var2"}
+Number   redony_FSZ_DOL_LE	"fsz Dolgozo_LE"				<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_51_3_var:var2"}
+Number   redony_FSZ_NOLD_LE	"fsz Nappali oldalsó_LE"		<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_52_0_var:var2"}
+Number   redony_FSZ_NKF_LE	"fsz Nappali kis-fix_LE"       <number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_52_3_var:var2"}
+Number   redony_FSZ_NTF_LE	"fsz Nappali toló-fix_LE"		<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_53_0_var:var2"}
+Number   redony_FSZ_NTNY_LE	"fsz Nappali toló-nyitható_LE"	<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_53_1_var:var2"}
+Number   redony_FSZ_NKET_LE	"fsz Nappali kétszárnyú_LE"	<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_53_2_var:var2"}
+Number   redony_FSZ_KNYH_LE	"fsz Konyha_FEL_LE"	<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_52_1_var:var2"}
+Number   redony_FSZ_FRD_LE	"fsz Fürdő_LE"	<number> (gRedonySettings) [ "home-group" ] {channel="mysensors:customSensor:gateway:Cover_52_2_var:var2"}
+
+

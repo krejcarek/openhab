@@ -1,0 +1,29 @@
+Group gHK_Redony
+Group gHK_Lampa
+
+Dimmer	hk_redony_EM_HAL	"Rollade Schlafzimmer"		<light> (gHK_Redony) [ "Lighting" ] {channel="mysensors:cover:gateway:Cover_51_0:cover"}
+Dimmer	hk_redony_EM_GAR	"Rollade Garderobe"			<light>	(gHK_Redony) [ "Lighting" ] {channel="mysensors:cover:gateway:Cover_51_1:cover"} 
+Dimmer  hk_redony_EM_FIU	"Rollade Jungs"   			<light> (gHK_Redony) [ "Lighting" ] {channel="mysensors:cover:gateway:Cover_53_4:cover"} 
+Dimmer  hk_redony_EM_LANY	"Rollade Mädchen"  			<light> (gHK_Redony) [ "Lighting" ] {channel="mysensors:cover:gateway:Cover_53_3:cover"}
+
+Dimmer  hk_redony_FSZ_VEN	"Rollade Gästezimmer"				<light> (gHK_Redony) [ "Lighting" ] {channel="mysensors:cover:gateway:Cover_51_2:cover"} 
+Dimmer  hk_redony_FSZ_DOL	"Rollade Arbeitszimmer"		<light> (gHK_Redony)  [ "Lighting" ] {channel="mysensors:cover:gateway:Cover_51_3:cover"} 
+Dimmer  hk_redony_FSZ_NOLD	"Rollade Wohnzimmer Seite"		<light>  (gHK_Redony) [ "Lighting" ] {channel="mysensors:cover:gateway:Cover_52_0:cover"} 
+Dimmer  hk_redony_FSZ_NKF	"Rollade Wohnzimmer klein fix"       <light>  (gHK_Redony) [ "Lighting" ] {channel="mysensors:cover:gateway:Cover_52_3:cover"} 
+Dimmer  hk_redony_FSZ_NTF	"Rollade Wohnzimmer schiebe fix"		<light> (gHK_Redony) [ "Lighting" ] {channel="mysensors:cover:gateway:Cover_53_0:cover"} 
+Dimmer  hk_redony_FSZ_NTNY	"Rollade Wohnzimmer schiebe"	<light> (gHK_Redony) [ "Lighting" ] {channel="mysensors:cover:gateway:Cover_53_1:cover"} 
+Dimmer  hk_redony_FSZ_NKET	"Rollade Wohnzimmer Doppeltür"	<light>  (gHK_Redony) [ "Lighting" ] {channel="mysensors:cover:gateway:Cover_53_2:cover"} 
+
+Dimmer hk_Redony "Alle Rolladen" <light> (gHK_Redony) [ "Lighting" ]
+Dimmer hk_RedonyFsz "Rolladen unten" <light>  (gHK_Redony) [ "Lighting" ]
+Dimmer hk_RedonyEm "Rolladen oben" <light> (gHK_Redony)  [ "Lighting" ]
+//Dimmer hk_RedonyEsteLe "Rolladen abends runter" <light> (gHK_Redony)  [ "Lighting" ]
+//Dimmer hk_RedonyEsteReszbenLe "Rolladen abends teils runter" <light>  (gHK_Redony) [ "Lighting" ]
+Dimmer hk_RedonyHaloszobak "Rolladen Schlafzimmern" <light> (gHK_Redony)  [ "Lighting" ]
+Dimmer hk_RedonyTeszt "Rolladen Test" <light> (gHK_Redony) [ "Lighting" ]
+Dimmer hk_RedonyNappali "Rolladen Wohnzimmer" <light> (gHK_Redony) [ "Lighting" ]
+
+Dimmer hk_MiLight_Box  "Licht Box" <light> (gHK_Lampa) [ "Lighting" ]  {channel="milight:rgbiboxLed:F0FE6BA2F970:0:ledbrightness", autoupdate="false"}
+Dimmer hk_MiLight_Nappali "Licht Wohnzimmer" <light> (gHK_Lampa) [ "Lighting" ]    {channel="milight:rgbwwLed:F0FE6BA2F970:1:ledbrightness"}
+Color hk_MiLight_Nappali_Color  "Farbe Wohnzimmer" <light> (gHK_Lampa) [ "Lighting" ]    {channel="milight:rgbwwLed:F0FE6BA2F970:1:ledcolor"}
+Switch hk_MiLight_Nappali_Nightmode  "Nachtlicht Wohnzimmer" <light> (gHK_Lampa) [ "Lighting" ]   {channel="milight:rgbwwLed:F0FE6BA2F970:1:lednightmode", autoupdate="false"}
