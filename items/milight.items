@@ -10,6 +10,7 @@ Dimmer MiLight_Nappali_Animation_mode    {channel="milight:rgbwwLed:F0FE6BA2F970
 Dimmer MiLight_Nappali_Animaiton_speed    {channel="milight:rgbwwLed:F0FE6BA2F970:1:animation_speed_relative"}
 
 
+
 /*
 Dimmer Light_LivingroomB    {channel="milight:whiteLed:F0FE6BA2F970:1:ledbrightness"} # Dimmer changing brightness for bulb in zone 1
 Dimmer Light_LivingroomC    {channel="milight:whiteLed:F0FE6BA2F970:1:ledtemperature"} # Dimmer changing colorTemperature for bulb in zone 1

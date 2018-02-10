@@ -7,17 +7,16 @@ rule "Mozgas"
 when
     Item Mozg_bent1 changed to OPEN 
 then
-  lock_Mozg.lock()
-  try {
-
-  	MiLight_Box.sendCommand(ON);
-  	Thread::sleep(15000);
-  	MiLight_Box.sendCommand(OFF);
-	
-
- } finally  {
-     // release the lock - we are ready to process the next event
-     lock_Mozg.unlock();
-	
-}
+	if (!lock_Mozg.isLocked){
+  		lock_Mozg.lock()
+  		try {
+			MiLight_Box.sendCommand(ON);
+			do {
+  				Thread::sleep(15000);
+  			} while( Mozg_bent1.state == OPEN);
+			MiLight_Box.sendCommand(OFF);
+  		} finally  {      // release the lock - we are ready to process the next event
+  		lock_Mozg.unlock();
+  		}
+ 	}
 end
