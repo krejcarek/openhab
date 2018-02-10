@@ -5,7 +5,8 @@ var ReentrantLock lock_Mozg = new ReentrantLock()
 
 rule "Mozgas"
 when
-    Item Mozg_bent1 changed to OPEN 
+    Item Mozg_bent1 changed to OPEN or
+    Item Mozg_bent2 changed to OPEN
 then
 	if (!lock_Mozg.isLocked){
   		lock_Mozg.lock()

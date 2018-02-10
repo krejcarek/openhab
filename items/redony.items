@@ -85,6 +85,9 @@ Contact	Mozg_bent1	"Mozgásérzékelő dolgozó  [%d]" <motion> {channel="mysens
 
 Number	Hom_bent2	"Hőmérséklet fent [%.1f °C]" <temperature> {channel="mysensors:temperature:gateway:Temp_11_1:temp"}
 Number	Par_bent2	"Páratartalom fent [%.1f %%]" <humidity> {channel="mysensors:humidity:gateway:Hum_11_0:hum"}
+Contact	Mozg_bent2	"Mozgásérzékelő fent  [%d]" <motion> {channel="mysensors:motion:gateway:Mot_11_2:tripped"}
+Number	Feny_bent2	"Fényérzékelő fent  [%.1f]" <light> {channel="mysensors:light-level:gateway:Light_11_3:light-level"}
+
 
 Number Weather_Temperature		"Outside Temperature [%.1f °C]"		<temperature> {weather="locationId=homeW, type=temperature, property=current"}
 Number Weather_Temperature_Tomorrow_max		"Temp. tomorrow max [%.1f °C]"		<temperature> {weather="locationId=homeW, forecast=1, type=temperature, property=max"}

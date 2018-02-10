@@ -141,14 +141,16 @@ Frame label="Automatizálás" {
 		//Text item=Par_bent3
 		//Text item=Mozg_bent3
 		//Text item=Feny_bent3
-		Text label="Fent" icon="firstfloor" {
+		Text label="Lent" icon="groundfloor" {
 			Text item=Hom_bent1
 			Text item=Par_bent1
 			Text item=Mozg_bent1
 		}
-		Text label="Lent" icon="groundfloor" {
+		Text label="Fent" icon="firstfloor" {
 			Text item=Hom_bent2
 			Text item=Par_bent2
+			Text item=Mozg_bent2
+			Text item=Feny_bent2
 		}
 		Text label="Idojaras" icon="climate" {
 			Text item=Weather_Temperature

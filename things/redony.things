@@ -42,8 +42,13 @@ Bridge mysensors:bridge-ser:gateway [ serialPort="/dev/ttyAMA0", sendDelay=733, 
 	humidity		Hum_10_0	[nodeId=10, childId=0]
 	motion			Mot_10_2	[nodeId=10, childId=2]
 	
+	
 	temperature		Temp_11_1	[nodeId=11, childId=1]
 	humidity		Hum_11_0	[nodeId=11, childId=0]
+	motion			Mot_11_2	[nodeId=11, childId=2]
+	light-level		Light_11_3	[nodeId=11, childId=3]
+	
+	
 	
 	temperature		Temp_31_1	[nodeId=31, childId=1]
 	humidity		Hum_31_0	[nodeId=31, childId=0]
