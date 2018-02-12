@@ -70,10 +70,12 @@ Number abendBeforeDusk	"Alkonyat elött [%d]"
 
 Switch Kapcsolo1 		"Kapcsolo 1" <switch> {channel="mysensors:light:gateway:Relay_12_1:status"}
 
+Number CHART_PERIOD
 
 Number Hom_kulso 	"Külső hőmérséklet [%.1f °C]" <temperature> {channel="yahooweather:weather:home:temperature" }
 
-Number	Hom_bent1	"Hőmérséklet dolgozó [%.1f °C]" <temperature> {channel="mysensors:temperature:gateway:Temp_10_1:temp"}
+Group Sensor_bent1
+Number	Hom_bent1	"Hőmérséklet dolgozó [%.1f °C]" <temperature> (Sensor_bent1) {channel="mysensors:temperature:gateway:Temp_10_1:temp"}
 Number	Par_bent1	"Páratartalom dolgozó [%.1f %%]" <humidity> {channel="mysensors:humidity:gateway:Hum_10_0:hum"}
 Contact	Mozg_bent1	"Mozgásérzékelő dolgozó  [%d]" <motion> {channel="mysensors:motion:gateway:Mot_10_2:tripped"}
 
@@ -82,9 +84,9 @@ Contact	Mozg_bent1	"Mozgásérzékelő dolgozó  [%d]" <motion> {channel="mysens
 //Contact	Mozg_bent3	"Mozgásérzékelő BB  [%d]" <motion> {channel="mysensors:motion:gateway:Mot_31_2:tripped"}
 //Number	Feny_bent3	"Fényérzékelő BB  [%.1f]" <light> {channel="mysensors:light-level:gateway:Light_31_3:light-level"}
 
-
-Number	Hom_bent2	"Hőmérséklet fent [%.1f °C]" <temperature> {channel="mysensors:temperature:gateway:Temp_11_1:temp"}
-Number	Par_bent2	"Páratartalom fent [%.1f %%]" <humidity> {channel="mysensors:humidity:gateway:Hum_11_0:hum"}
+Group Sensor_bent2
+Number	Hom_bent2	"Hőmérséklet fent [%.1f °C]" <temperature> (Sensor_bent2) {channel="mysensors:temperature:gateway:Temp_11_1:temp"}
+Number	Par_bent2	"Páratartalom fent [%.1f %%]" <humidity> (Sensor_bent2) {channel="mysensors:humidity:gateway:Hum_11_0:hum"}
 Contact	Mozg_bent2	"Mozgásérzékelő fent  [%d]" <motion> {channel="mysensors:motion:gateway:Mot_11_2:tripped"}
 Number	Feny_bent2	"Fényérzékelő fent  [%.1f]" <light> {channel="mysensors:light-level:gateway:Light_11_3:light-level"}
 

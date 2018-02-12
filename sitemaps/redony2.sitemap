@@ -145,12 +145,39 @@ Frame label="Automatizálás" {
 			Text item=Hom_bent1
 			Text item=Par_bent1
 			Text item=Mozg_bent1
+	                Switch item=CHART_PERIOD label="Grafikon skala" mappings=[0="Ora", 1="Nap", 2="Het"]
+			Chart item=Hom_bent1 period=h refresh=300 visibility=[CHART_PERIOD==0, CHART_PERIOD=="Uninitialized"]
+			Chart item=Hom_bent1 period=D refresh=300 visibility=[CHART_PERIOD==1]
+			Chart item=Hom_bent1 period=W refresh=300 visibility=[CHART_PERIOD==2]
+			Chart item=Par_bent1 period=h refresh=300 visibility=[CHART_PERIOD==0, CHART_PERIOD=="Uninitialized"]
+                        Chart item=Par_bent1 period=D refresh=300 visibility=[CHART_PERIOD==1]
+                        Chart item=Par_bent1 period=W refresh=300 visibility=[CHART_PERIOD==2]
+			Chart item=Mozg_bent1 period=h refresh=300 visibility=[CHART_PERIOD==0, CHART_PERIOD=="Uninitialized"]
+                        Chart item=Mozg_bent1 period=D refresh=300 visibility=[CHART_PERIOD==1]
+                        Chart item=Mozg_bent1 period=W refresh=300 visibility=[CHART_PERIOD==2]
+
+
+              
 		}
 		Text label="Fent" icon="firstfloor" {
 			Text item=Hom_bent2
 			Text item=Par_bent2
 			Text item=Mozg_bent2
 			Text item=Feny_bent2
+                        Switch item=CHART_PERIOD label="Grafikon skala" mappings=[0="Ora", 1="Nap", 2="Het"]
+                        Chart item=Hom_bent2 period=h refresh=300 visibility=[CHART_PERIOD==0, CHART_PERIOD=="Uninitialized"]
+                        Chart item=Hom_bent2 period=D refresh=300 visibility=[CHART_PERIOD==1]
+                        Chart item=Hom_bent2 period=W refresh=300 visibility=[CHART_PERIOD==2]
+                        Chart item=Par_bent2 period=h refresh=300 visibility=[CHART_PERIOD==0, CHART_PERIOD=="Uninitialized"]
+                        Chart item=Par_bent2 period=D refresh=300 visibility=[CHART_PERIOD==1]
+                        Chart item=Par_bent2 period=W refresh=300 visibility=[CHART_PERIOD==2]
+                        Chart item=Mozg_bent2 period=h refresh=300 visibility=[CHART_PERIOD==0, CHART_PERIOD=="Uninitialized"]
+                        Chart item=Mozg_bent2 period=D refresh=300 visibility=[CHART_PERIOD==1]
+                        Chart item=Mozg_bent2 period=W refresh=300 visibility=[CHART_PERIOD==2]
+                        Chart item=Feny_bent2 period=h refresh=300 visibility=[CHART_PERIOD==0, CHART_PERIOD=="Uninitialized"]
+                        Chart item=Feny_bent2 period=D refresh=300 visibility=[CHART_PERIOD==1]
+                        Chart item=Feny_bent2 period=W refresh=300 visibility=[CHART_PERIOD==2]
+
 		}
 		Text label="Idojaras" icon="climate" {
 			Text item=Weather_Temperature
