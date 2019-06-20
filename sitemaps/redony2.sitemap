@@ -195,7 +195,7 @@ Frame label="Automatizálás" {
 
 Frame label="Log" {
 		Text label="openHAB Eventlog" icon="office" {
-         Webview url="http://192.168.100.107:9001" height=20
+         Webview url="http://192.168.1.100:9001" height=20
 	}
 		
 }

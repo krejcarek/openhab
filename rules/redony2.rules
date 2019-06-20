@@ -11,6 +11,8 @@ var ReentrantLock lock2 = new ReentrantLock()
 var Timer timer3 = null
 var ReentrantLock lock3 = new ReentrantLock()
 
+var Timer timer4 = null
+var ReentrantLock lock4 = new ReentrantLock()
 
 rule "Initialization"
  when 
@@ -217,7 +219,6 @@ then
                 //gRedonyTeszt.sendCommand(100)
                 RedonyEsteLe.sendCommand(100)
                 RedonyEsteReszbenLe.sendCommand(abendRolladePerc.state.toString())
-                Kapcsolo1.sendCommand("ON")
                 
            }
            // Re-Arm the timer to trigger again tomorrow (same time) 
@@ -233,6 +234,76 @@ then
   }
 end
 
+rule "Lampa fel"
+when
+    Item abendDusk changed or
+    System started    
+then
+	  // If the UI to change the Alarm time is clicked several times the code below
+  // is subject to race conditions. Therefore we make sure that all events 
+  // are processed one after the other.
+  lock4.lock()
+  try {
+    //var String msg = ""
+
+    // Copy the Alarm-Time from the UI to local variables
+
+
+	//msg=abendDusk.state.format("%1$tk:%1$tM")
+
+	//postUpdate(abendZeitMessage,msg)
+	
+    // Combine the hour and minutes to one string to be displayed in the 
+    // user interface
+    
+
+    // calculate the alarm time [min]
+    var int abendzeit1
+
+    abendzeit1 = Integer::parseInt(abendDusk.state.format("%1$tk"))*60 + Integer::parseInt(abendDusk.state.format("%1$tM"))
+    //abendzeit1=abendzeit1.intValue-(abendBeforeDusk.state as DecimalType).intValue
+
+
+    //abendzeit1 = abendzeit1.intValue
+
+    // calculate current time [min]
+    var int jetzt1
+    jetzt1 = now.getMinuteOfDay
+    jetzt1 = jetzt1.intValue
+
+    // calculate the difference between the requested alarm time and 
+    // current time (again in minutes)  
+    var int delta1
+    delta1 = (abendzeit1 - jetzt1)
+    delta1 = delta1.intValue
+
+    // add one day (1440 minutes) if alarm time for today already passed
+    if (jetzt1 > abendzeit1) { delta1 = delta1 + 1440 }
+
+    // check if there is already an alarm timer; cancel it if present
+    if (timer4 != null) {
+       timer4.cancel
+       timer4 = null
+    }
+    // create a new timer using the calculated delta [min]
+    timer4 = createTimer(now.plusMinutes(delta1)) [|
+        // This code will be executed if the timer triggers
+        // ************************************************
+        // check if alarm clock is armed for this weekday
+
+        Kapcsolo1.sendCommand("ON")
+
+           // Re-Arm the timer to trigger again tomorrow (same time) 
+        timer4.reschedule(now.plusHours(24))
+        // ************************************************
+        // Here the code ends that executes once the timer triggers 
+        ]
+
+  } finally  {
+     // release the lock - we are ready to process the next event
+     lock4.unlock()
+  }
+end
 
 rule "Foldgomb ki"
 when
@@ -259,7 +330,9 @@ when
     Item hk_RedonyEsteReszbenLe received command
 then
 	gRedonyEsteReszbenLe?.members.forEach[item|
-		item.sendCommand(receivedCommand)
+		if (item.state.toString() > receivedCommand.toString()) {
+			item.sendCommand(receivedCommand)	
+		}
 		Thread::sleep(1000)
 	]
 end
